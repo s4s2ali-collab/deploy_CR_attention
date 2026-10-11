@@ -52,11 +52,10 @@ if uploaded_file is not None:
 
     # UI Feedback Spinner while processing
     with st.spinner("🧠 Analyzing image with YOLO model..."):
-        # Perform prediction with the slider-based confidence threshold
-        results = model.predict(source=image, conf=confidence_threshold)
+        # Corrected: Added [0] index to handle prediction array wrappers
+        results = model.predict(source=image, conf=confidence_threshold)[0]
         
-        # Corrected variable name alignment
-        result_image = results[0].plot()
+        result_image = results.plot()
 
         # Extract stats for metrics dashboard
         boxes = results.boxes
