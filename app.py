@@ -32,7 +32,7 @@ confidence_threshold = st.sidebar.slider(
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 🛠️ Technology Stack")
-st.sidebar.info("YOLOv8 • Streamlit • OpenCV • PIL")
+st.sidebar.info("YOLOv11 • Streamlit • OpenCV • PIL")
 
 # 4. Main Page Header Layout
 st.title("🔍 YOLO Object Detection Dashboard")
