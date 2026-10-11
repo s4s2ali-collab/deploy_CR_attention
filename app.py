@@ -41,10 +41,7 @@ st.markdown(
 )
 st.markdown("---")
 
-# 5. Dynamic Content Split: Columns for Before/After viewing
-if "clicked" not in st.session_state:
-    st.session_state.clicked = False
-
+# 5. File Uploader Layout
 uploaded_file = st.file_uploader(
     "Choose an image file...", type=["jpg", "jpeg", "png"]
 )
@@ -57,17 +54,19 @@ if uploaded_file is not None:
     with st.spinner("🧠 Analyzing image with YOLO model..."):
         # Perform prediction with the slider-based confidence threshold
         results = model.predict(source=image, conf=confidence_threshold)
-        result_array = results[0].plot()
+        
+        # Corrected variable name alignment
+        result_image = results[0].plot()
 
         # Extract stats for metrics dashboard
-        boxes = results[0].boxes
+        boxes = results.boxes
         total_detections = len(boxes)
 
         # Count classes found
         class_counts = {}
         names = model.names
         for box in boxes:
-            cls_id = int(box.cls[0])
+            cls_id = int(box.cls)
             class_name = names.get(cls_id, f"Class {cls_id}")
             class_counts[class_name] = class_counts.get(class_name, 0) + 1
 
